@@ -70,19 +70,31 @@ class Meal extends StatelessWidget{
             ),
             child: Row(
               children: <Widget>[
-                RichText(text: TextSpan(
+                Column(
                   children: [
-                    TextSpan(text:'$name $gram g\n',style: TextStyle(color: Colors.white),),
-                    TextSpan(text:'$kcal kcal',style: TextStyle(color: Colors.white),),
-                    TextSpan(text:'\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t$whey g\t\t\t\t\t\t\t\t\t\t\t\t',style: TextStyle(color: Colors.white),),
-
-                    TextSpan(text:'$fat g \t\t\t\t\t\t\t\t\t\t\t',style: TextStyle(color: Colors.white),),
-
-                    TextSpan(text:'$carbohydrates g',style: TextStyle(color: Colors.white),),
-
+                    Text('$name $gram g\n',style: TextStyle(color: Colors.white),),
+                    Text('$kcal kcal',style: TextStyle(color: Colors.white),),
                   ]
-                )),
-
+                ),
+                Spacer(),
+                Column(
+                  children: [
+                  Text('$whey g',style: TextStyle(color: Colors.white),),
+                ]
+                ),
+                SizedBox(width: 30,),
+                Column(
+                  children: [
+                    Text('$fat g',style: TextStyle(color: Colors.white),),
+                  ],
+                ),
+                SizedBox(width: 30,),
+                Column(
+                  children: [
+                    Text('$carbohydrates g',style: TextStyle(color: Colors.white),),
+                  ],
+                ),
+                SizedBox(width: 70,),
 
               ],
             ),
