@@ -38,6 +38,7 @@ dependencies:
   flutter_svg: ^0.23.0+1
   line_icons: ^2.0.1
   page_transition: ^2.0.4
+  shared_preferences: ^2.0.9
 dev_dependencies:
   flutter_test:
     sdk: flutter

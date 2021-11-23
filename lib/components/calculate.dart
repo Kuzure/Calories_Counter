@@ -1,6 +1,8 @@
+import 'package:calories_counter_app/service/share_preference.dart';
 import 'package:calories_counter_app/widget/bottom_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 enum Plec { male, female }
 class Calculate extends StatefulWidget{
   const Calculate({Key? key}) : super(key: key);
@@ -25,6 +27,7 @@ class _Calculate extends State<Calculate> {
     height.dispose();
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context ) {
     // TODO: implement build
@@ -167,23 +170,20 @@ class _Calculate extends State<Calculate> {
           padding: EdgeInsets.all(10),
           child: FlatButton(
             textColor: Colors.white, // foreground
-            onPressed: () {
+            onPressed: () async {
               int kaloryka=0;
               double a=double.parse(weight.text);
               double b=double.parse(age.text);
               double c=double.parse(height.text);
             if(_plec==Plec.male){
               kaloryka=(66.47+13.7*a+5.0*c-6.76*b).toInt();
-              print(kaloryka);
             }
             if(_plec==Plec.female){
               kaloryka=(655.1+(9.567*a)+(1.85*c)-(4.68*b)).toInt();
-              print(kaloryka);
             }
             if(selectedItem=='Siedzący tryb życia')
               {
                 kaloryka=(kaloryka*1.3).toInt();
-                print(kaloryka);
               }
               if(selectedItem=='Umiarkowana aktywność fizyczna')
               {
@@ -203,20 +203,20 @@ class _Calculate extends State<Calculate> {
               }
             if(selectCel=='Chce Utrzymać wagę')
               {
-                print(kaloryka);
               }
               if(selectCel=='Chce schudnąć')
               {
                 double x=a/100*7000/7;
                 kaloryka=(kaloryka-x).toInt();
-                print(kaloryka);
               }
               if(selectCel=='Chcę przytyć')
               {
                 double x=a/100*7000/7;
                 kaloryka=(kaloryka+x).toInt();
-                print(kaloryka);
               }
+              await SharePreferenceService().setWaga(weight.text);
+              await SharePreferenceService().setWzrost(height.text);
+              await SharePreferenceService().setKaloryka(kaloryka.toString());
               int bialko=(2*a).toInt();
               int tluszcze=(30/100*kaloryka/9).toInt();
               int wegle=((kaloryka-(a*4+30/100*kaloryka))/4).toInt();

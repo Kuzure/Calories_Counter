@@ -2,6 +2,7 @@ import 'package:calories_counter_app/components/body.dart';
 import 'package:calories_counter_app/components/profil.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'components/calculate.dart';
 
 
@@ -44,6 +45,7 @@ class _MyHomePage  extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    SharedPreferences.setMockInitialValues({});
     // TODO: implement build
     return Scaffold(
       backgroundColor: Colors.white10,

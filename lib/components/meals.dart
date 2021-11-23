@@ -82,19 +82,19 @@ class Meal extends StatelessWidget{
                   Text('$whey g',style: TextStyle(color: Colors.white),),
                 ]
                 ),
-                SizedBox(width: 30,),
+                SizedBox(width: 40,),
                 Column(
                   children: [
                     Text('$fat g',style: TextStyle(color: Colors.white),),
                   ],
                 ),
-                SizedBox(width: 30,),
+                SizedBox(width: 40,),
                 Column(
                   children: [
                     Text('$carbohydrates g',style: TextStyle(color: Colors.white),),
                   ],
                 ),
-                SizedBox(width: 70,),
+                SizedBox(width: 60,),
 
               ],
             ),
