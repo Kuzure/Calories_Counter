@@ -1,6 +1,6 @@
 
 
-import 'package:calories_counter_app/components/profil.dart';
+import 'package:calories_counter_app/components/calculate.dart';
 import 'package:calories_counter_app/components/title_meal.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

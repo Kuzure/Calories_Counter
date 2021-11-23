@@ -1,10 +1,8 @@
 import 'package:calories_counter_app/components/body.dart';
-import 'package:calories_counter_app/widget/bottom_bar.dart';
+import 'package:calories_counter_app/components/profil.dart';
 import 'package:flutter/cupertino.dart';
-
 import 'package:flutter/material.dart';
-
-import 'components/profil.dart';
+import 'components/calculate.dart';
 
 
 void main() {
@@ -40,7 +38,7 @@ class _MyHomePage  extends State<MyHomePage> {
   int _selectedIndex = 0;
   List<Widget> _widgetOptions = <Widget>[
     Body(),
-    Profil(),
+    Calculate(),
     Profil(),
   ];
 
