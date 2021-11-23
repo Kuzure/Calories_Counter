@@ -1,11 +1,9 @@
 import 'package:calories_counter_app/components/body.dart';
-import 'package:calories_counter_app/widget/bottom_bar.dart';
 import 'package:flutter/cupertino.dart';
-
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-import 'components/profil.dart';
-
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:line_icons/line_icons.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,31 +16,20 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: true,
+      debugShowCheckedModeBanner: false,
       title: 'Calories_counter_app',
       theme: ThemeData(
         backgroundColor: Colors.white10,
-        appBarTheme:   AppBarTheme(color:  Colors.white10, elevation: 0),
+        appBarTheme:  const AppBarTheme(color:  Colors.white10, elevation: 0),
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home:  MyHomePage(),
+      home: const MyHomePage(),
     );
   }
 }
-class MyHomePage extends StatefulWidget {
+
+class MyHomePage extends StatelessWidget {
   const MyHomePage({Key? key}) : super(key: key);
-
-  @override
-  State<MyHomePage> createState() => _MyHomePage();
-}
-
-class _MyHomePage  extends State<MyHomePage> {
-  int _selectedIndex = 0;
-  List<Widget> _widgetOptions = <Widget>[
-    Body(),
-    Profil(),
-    Profil(),
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -50,34 +37,8 @@ class _MyHomePage  extends State<MyHomePage> {
     return Scaffold(
       backgroundColor: Colors.white10,
       appBar: buildAppBar(),
-      body:  _widgetOptions.elementAt(_selectedIndex),
-      bottomNavigationBar: BottomNavigationBar(
-        items:  [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.restaurant),
-            label: 'Home',
-
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.list),
-            label: 'Lista',
-
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.account_circle_outlined),
-            label: 'Profli',
-
-          ),
-        ],
-        backgroundColor: Colors.black,
-        currentIndex: _selectedIndex,
-        unselectedItemColor: Colors.white,
-        selectedItemColor: Colors.blueAccent,
-        onTap: (index) {
-    setState(() {
-    _selectedIndex = index;
-    });}
-      ),
+      body:  Body(),
+      bottomNavigationBar: MyBottomNavBar(),
     );
   }
 
@@ -103,6 +64,41 @@ class _MyHomePage  extends State<MyHomePage> {
           onPressed: () {},
         ),
       ],
+    );
+  }
+}
+class MyBottomNavBar extends StatelessWidget {
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.only(
+        left: 40,
+        right: 40,
+        bottom: 20,
+      ),
+      height: 80,
+      decoration: BoxDecoration(
+        color: Colors.black,
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
+          IconButton(
+            icon: Icon(Icons.restaurant,color: Colors.white,),
+            onPressed: () {
+            },
+          ),
+          IconButton(
+            icon: Icon(Icons.list,color: Colors.white),
+            onPressed: () {},
+          ),
+          IconButton(
+            icon: Icon(Icons.account_circle_outlined,color: Colors.white),
+            onPressed: () {},
+          ),
+        ],
+      ),
     );
   }
 }
