@@ -1,32 +1,34 @@
-import 'package:calories_counter_app/components/body.dart';
-import 'package:calories_counter_app/components/profil.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+<<<<<<< HEAD
 import 'package:shared_preferences/shared_preferences.dart';
 import 'components/calculate.dart';
+=======
+>>>>>>> b24da1dcc4e9941d4694ea9e3a13d6b6e54a15b2
 
+import 'components/login_page.dart';
 
-void main() {
-  runApp(const MyApp());
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: true,
-      title: 'Calories_counter_app',
+      title: 'Email And Password Login',
       theme: ThemeData(
-        backgroundColor: Colors.white10,
-        appBarTheme:   AppBarTheme(color:  Colors.white10, elevation: 0),
-        visualDensity: VisualDensity.adaptivePlatformDensity,
+        primarySwatch: Colors.red,
       ),
-      home:  MyHomePage(),
+      debugShowCheckedModeBanner: false,
+      home: LoginScreen(),
     );
   }
+<<<<<<< HEAD
 }
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key}) : super(key: key);
@@ -106,3 +108,6 @@ class _MyHomePage  extends State<MyHomePage> {
     );
   }
 }
+=======
+}
+>>>>>>> b24da1dcc4e9941d4694ea9e3a13d6b6e54a15b2
