@@ -59,25 +59,9 @@ class _MyHomePage  extends State<MyHomePage> {
 
   AppBar buildAppBar() {
     return AppBar(
-      leading: IconButton(
-        icon: const Icon(
-          Icons.arrow_back,
-        ),
-        iconSize: 25.0,
-        color: Colors.white,
-        onPressed: () {},
-      ),
       centerTitle: true,
-      title: Image.asset("assets/icons/logo.PNG"),
+      title: Image.asset("assets/icons/logo2.PNG"),
       actions: <Widget>[
-        IconButton(
-          icon: const Icon(
-            Icons.arrow_forward,
-          ),
-          iconSize: 25.0,
-          color: Colors.white,
-          onPressed: () {},
-        ),
       ],
     );
   }

@@ -15,17 +15,10 @@ class Body extends StatelessWidget{
     // TODO: implement build
     return SingleChildScrollView(
       child: Column(
-      children: const <Widget>[
-        MacroList(),
+      children:  <Widget>[
         Title_Meal(title: "Śniadanie"),
         Meals(),
-        Title_Meal(title: "II Śniadanie"),
-        Meals(),
-        Title_Meal(title: "Lunch"),
-        Meals(),
         Title_Meal(title: "Obiad"),
-        Meals(),
-        Title_Meal(title: "Przekąska"),
         Title_Meal(title: "Kolacja"),
       ],
     )
