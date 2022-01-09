@@ -1,3 +1,4 @@
+import 'package:calories_counter_app/components/product_list.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -20,7 +21,10 @@ class Title_Meal extends StatelessWidget{
            IconButton(
             icon: const Icon(Icons.add_circle_outlined),
             color: Colors.white,
-            onPressed: () {},
+            onPressed: () {Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => AddBreakfast()),
+            );},
           ),
         ],
       ),
