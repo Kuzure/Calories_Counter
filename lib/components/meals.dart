@@ -94,7 +94,7 @@ class Meal extends StatelessWidget {
             child: Container(
               padding: const EdgeInsets.all(25 / 2),
               decoration: const BoxDecoration(
-                color: Colors.white10,
+                color: Colors.black,
               ),
               child: Row(children: <Widget>[
                 Text(

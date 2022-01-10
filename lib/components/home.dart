@@ -25,7 +25,7 @@ class _MyHomePage extends State<MyHomePage> {
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
-      backgroundColor: Colors.white10,
+      backgroundColor: Colors.white,
       appBar: buildAppBar(),
       body: _widgetOptions.elementAt(_selectedIndex),
       bottomNavigationBar: BottomNavigationBar(

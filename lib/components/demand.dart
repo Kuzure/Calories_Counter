@@ -46,7 +46,7 @@ class _Demend extends State<Demend> {
   Widget build(BuildContext context) {
     // TODO: implement build
     return Theme(
-        data: ThemeData(unselectedWidgetColor: Colors.white),
+        data: ThemeData(unselectedWidgetColor: Colors.black),
         child: SingleChildScrollView(
             child: Column(
           children: <Widget>[
@@ -57,7 +57,7 @@ class _Demend extends State<Demend> {
               style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 23,
-                  color: Colors.white),
+                  color: Colors.black),
             ),
             const SizedBox(
               height: 10,
@@ -65,12 +65,12 @@ class _Demend extends State<Demend> {
             ListTile(
               title: const Text(
                 'Mężczyzna',
-                style: TextStyle(color: Colors.white),
+                style: TextStyle(color: Colors.black),
               ),
               leading: Radio<Plec>(
                 value: Plec.male,
                 groupValue: _plec,
-                activeColor: Colors.white,
+                activeColor: Colors.black,
                 onChanged: (Plec? value) {
                   setState(() {
                     _plec = value;
@@ -81,12 +81,12 @@ class _Demend extends State<Demend> {
             ListTile(
               title: const Text(
                 'Kobieta',
-                style: TextStyle(color: Colors.white),
+                style: TextStyle(color: Colors.black),
               ),
               leading: Radio<Plec>(
                 value: Plec.female,
                 groupValue: _plec,
-                activeColor: Colors.white,
+                activeColor: Colors.black,
                 onChanged: (Plec? value) {
                   setState(() {
                     _plec = value;
@@ -99,19 +99,19 @@ class _Demend extends State<Demend> {
               child: TextField(
                 decoration: const InputDecoration(
                   enabledBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(color: Colors.white),
+                    borderSide: BorderSide(color: Colors.black),
                   ),
                   focusedBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(color: Colors.white),
+                    borderSide: BorderSide(color: Colors.black),
                   ),
                   border: OutlineInputBorder(),
-                  labelStyle:  TextStyle(color: Colors.white),
+                  labelStyle:  TextStyle(color: Colors.black),
                   labelText: 'Waga',
                   hintText: 'Podaj Wage',
-                  hintStyle:  TextStyle(color: Colors.white),
+                  hintStyle:  TextStyle(color: Colors.black),
                 ),
                 controller: weight,
-                style: const TextStyle(color: Colors.white),
+                style: const TextStyle(color: Colors.black),
               ),
             ),
             Padding(
@@ -119,19 +119,19 @@ class _Demend extends State<Demend> {
               child: TextField(
                 decoration: const InputDecoration(
                   enabledBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(color: Colors.white),
+                    borderSide: BorderSide(color: Colors.black),
                   ),
                   focusedBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(color: Colors.white),
+                    borderSide: BorderSide(color: Colors.black),
                   ),
                   border: OutlineInputBorder(),
-                  labelStyle:  TextStyle(color: Colors.white),
+                  labelStyle:  TextStyle(color: Colors.black),
                   labelText: 'Wiek',
                   hintText: 'Podaj Wiek',
-                  hintStyle:  TextStyle(color: Colors.white),
+                  hintStyle:  TextStyle(color: Colors.black),
                 ),
                 controller: age,
-                style: const TextStyle(color: Colors.white),
+                style: const TextStyle(color: Colors.black),
               ),
             ),
             Padding(
@@ -139,19 +139,19 @@ class _Demend extends State<Demend> {
               child: TextField(
                 decoration: const InputDecoration(
                   enabledBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(color: Colors.white),
+                    borderSide: BorderSide(color: Colors.black),
                   ),
                   focusedBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(color: Colors.white),
+                    borderSide: BorderSide(color: Colors.black),
                   ),
                   border: OutlineInputBorder(),
-                  labelStyle:  TextStyle(color: Colors.white),
+                  labelStyle:  TextStyle(color: Colors.black),
                   labelText: 'Wzrost',
                   hintText: 'Podaj Wzrost',
-                  hintStyle:  TextStyle(color: Colors.white),
+                  hintStyle:  TextStyle(color: Colors.black),
                 ),
                 controller: height,
-                style: const TextStyle(color: Colors.white),
+                style: const TextStyle(color: Colors.black),
               ),
             ),
             Padding(
@@ -159,7 +159,7 @@ class _Demend extends State<Demend> {
               child: DropdownButton<String>(
                 dropdownColor: Colors.black,
                 value: selectedItem,
-                style: const TextStyle(color: Colors.white, fontSize: 20),
+                style: const TextStyle(color: Colors.black, fontSize: 20),
                 onChanged: (String? string) =>
                     setState(() => selectedItem = string!),
                 selectedItemBuilder: (BuildContext context) {
@@ -180,7 +180,7 @@ class _Demend extends State<Demend> {
               child: DropdownButton<String>(
                 dropdownColor: Colors.black,
                 value: selectCel,
-                style: const TextStyle(color: Colors.white, fontSize: 20),
+                style: const TextStyle(color: Colors.black, fontSize: 20),
                 onChanged: (String? string) =>
                     setState(() => selectCel = string!),
                 selectedItemBuilder: (BuildContext context) {
@@ -199,7 +199,7 @@ class _Demend extends State<Demend> {
             Padding(
               padding: const EdgeInsets.all(10),
               child: FlatButton(
-                textColor: Colors.white, // foreground
+                textColor: Colors.black, // foreground
                 onPressed: () {
                   int kaloryka = 0;
                   double a = double.parse(weight.text);

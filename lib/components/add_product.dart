@@ -25,9 +25,7 @@ class _AddProduct extends State<AddProduct> {
   String title = '';
   String _scanBarcode = 'Unknown';
 
-  _AddProduct(String title){
-    this.title=title;
-  }
+  _AddProduct(String title);
   @override
   void initState() {
     super.initState();

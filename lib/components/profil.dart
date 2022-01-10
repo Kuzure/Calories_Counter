@@ -26,7 +26,7 @@ class Profil extends StatelessWidget {
           const SizedBox(
             height: 30.0,
           ),
-          const CircleAvatar(radius: 130.0, backgroundColor: Colors.white),
+          const CircleAvatar(radius: 130.0, backgroundColor: Colors.black),
           const SizedBox(
             height: 50.0,
           ),
@@ -53,12 +53,12 @@ class Profil extends StatelessWidget {
                             Text(
                               "Imie:${doc['firstName']}",
                               style: const TextStyle(
-                                  color: Colors.white, fontSize: 20),
+                                  color: Colors.black, fontSize: 20),
                             ),
                             const Spacer(),
                             Text("Nazwisko:${doc['secondName']}",
                                 style: const TextStyle(
-                                    color: Colors.white, fontSize: 20)),
+                                    color: Colors.black, fontSize: 20)),
                             const Spacer(),
                           ],
                         ),
@@ -66,7 +66,7 @@ class Profil extends StatelessWidget {
                           child: Text(
                               "Zapotrzebowanie:${doc['zapotrzebowanie']} kcal",
                               style: const TextStyle(
-                                  color: Colors.white, fontSize: 20)),
+                                  color: Colors.black, fontSize: 20)),
                         )
                       ],
                     );

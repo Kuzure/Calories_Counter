@@ -19,7 +19,7 @@ class TitleMeal extends StatelessWidget {
           const Spacer(),
           IconButton(
             icon: const Icon(Icons.add_circle_outlined),
-            color: Colors.white,
+            color: Colors.black,
             onPressed: () {
               Navigator.push(
                 context,
@@ -54,7 +54,7 @@ class TitleWithCustomUnderline extends StatelessWidget {
               style: const TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
-                  color: Colors.white),
+                  color: Colors.black),
             ),
           ),
         ],

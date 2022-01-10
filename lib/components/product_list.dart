@@ -18,6 +18,7 @@ class AddBreakfast extends StatelessWidget {
       appBar: AppBar(
         title: const Text("Produkty"),
         centerTitle: true,
+        backgroundColor: Colors.white,
       ),
       body: StreamBuilder<QuerySnapshot>(
         stream: db.collection('products').snapshots(),
