@@ -1,139 +1,105 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 
-import 'add_meal.dart';
+class AddProduct extends StatefulWidget {
+  String title='';
+  AddProduct(String title){
+    this.title=title;
+  }
 
-class AddProduct extends StatelessWidget{
+  @override
+  _AddProduct createState() => _AddProduct(title);
+}
+
+class _AddProduct extends State<AddProduct> {
   FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
-  final _auth = FirebaseAuth.instance;
   final nazwa = TextEditingController();
   final cal = TextEditingController();
   final whey = TextEditingController();
   final fat = TextEditingController();
   final carbo = TextEditingController();
   final qr = TextEditingController();
-  String title='';
-  AddProduct(String title)
-  {
+  String title = '';
+  String _scanBarcode = 'Unknown';
+
+  _AddProduct(String title){
     this.title=title;
   }
   @override
+  void initState() {
+    super.initState();
+  }
+  Future<void> startBarcodeScanStream() async {
+    FlutterBarcodeScanner.getBarcodeStreamReceiver(
+        '#ff6666', 'Cancel', true, ScanMode.BARCODE)!
+        .listen((barcode) => print(barcode));
+  }
+
+  Future<void> scanQR() async {
+    String barcodeScanRes;
+    // Platform messages may fail, so we use a try/catch PlatformException.
+    try {
+      barcodeScanRes = await FlutterBarcodeScanner.scanBarcode(
+          '#ff6666', 'Cancel', true, ScanMode.QR);
+      print(barcodeScanRes);
+    } on PlatformException {
+      barcodeScanRes = 'Failed to get platform version.';
+    }
+
+    // If the widget was removed from the tree while the asynchronous platform
+    // message was in flight, we want to discard the reply rather than calling
+    // setState to update our non-existent appearance.
+    if (!mounted) return;
+
+    setState(() {
+      _scanBarcode = barcodeScanRes;
+    });
+  }
+
+  // Platform messages are asynchronous, so we initialize in an async method.
+  Future<void> scanBarcodeNormal() async {
+    String barcodeScanRes;
+    // Platform messages may fail, so we use a try/catch PlatformException.
+    try {
+      barcodeScanRes = await FlutterBarcodeScanner.scanBarcode(
+          '#ff6666', 'Cancel', true, ScanMode.BARCODE);
+      print(barcodeScanRes);
+    } on PlatformException {
+      barcodeScanRes = 'Failed to get platform version.';
+    }
+
+    // If the widget was removed from the tree while the asynchronous platform
+    // message was in flight, we want to discard the reply rather than calling
+    // setState to update our non-existent appearance.
+    if (!mounted) return;
+
+    setState(() {
+      _scanBarcode = barcodeScanRes;
+    });
+  }
+
+  AddProduct(String title){
+    this.title=title;
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Dodaj Produkt"),
-        centerTitle: true,
-        backgroundColor: Colors.white,
-        foregroundColor: Colors.black,
-      ),
-      body: Center(child:
-          SingleChildScrollView(
-          child: Column(children: [
-          TextField(
-            decoration: InputDecoration(
-              enabledBorder: UnderlineInputBorder(
-                borderSide: BorderSide(color: Colors.black),
-              ),
-              focusedBorder: UnderlineInputBorder(
-                borderSide: BorderSide(color: Colors.black),
-              ),
-              border: OutlineInputBorder(),
-              labelStyle: new TextStyle(color: Colors.black),
-              labelText: 'Nazwa',
-              hintText: 'Podaj nazwe produktu',
-              hintStyle: new TextStyle(color: Colors.black),
-            ),controller: nazwa,
-            style: TextStyle(color: Colors.black),
-          ),
-          SizedBox(height: 10,),
-          TextField(
-            decoration: InputDecoration(
-              enabledBorder: UnderlineInputBorder(
-                borderSide: BorderSide(color: Colors.black),
-              ),
-              focusedBorder: UnderlineInputBorder(
-                borderSide: BorderSide(color: Colors.black),
-              ),
-              border: OutlineInputBorder(),
-              labelStyle: new TextStyle(color: Colors.black),
-              labelText: 'Kaloryka',
-              hintText: 'Podaj kaloryke w 1g produktu',
-              hintStyle: new TextStyle(color: Colors.black),
-            ),controller: cal,
-            style: TextStyle(color: Colors.black),
-          ),
-          SizedBox(height: 10,),
-          TextField(
-            decoration: InputDecoration(
-              enabledBorder: UnderlineInputBorder(
-                borderSide: BorderSide(color: Colors.black),
-              ),
-              focusedBorder: UnderlineInputBorder(
-                borderSide: BorderSide(color: Colors.black),
-              ),
-              border: OutlineInputBorder(),
-              labelStyle: new TextStyle(color: Colors.black),
-              labelText: 'Węglowodany',
-              hintText: 'Podaj ilość Węglowodanów w 1g produktu',
-              hintStyle: new TextStyle(color: Colors.black),
-            ),controller: carbo,
-            style: TextStyle(color: Colors.black),
-          ),
-          SizedBox(height: 10,),
-          TextField(
-            decoration: InputDecoration(
-              enabledBorder: UnderlineInputBorder(
-                borderSide: BorderSide(color: Colors.black),
-              ),
-              focusedBorder: UnderlineInputBorder(
-                borderSide: BorderSide(color: Colors.black),
-              ),
-              border: OutlineInputBorder(),
-              labelStyle: new TextStyle(color: Colors.black),
-              labelText: 'Białko',
-              hintText: 'Podaj ilość białka w 1g produktu',
-              hintStyle: new TextStyle(color: Colors.black),
-            ),controller: whey,
-            style: TextStyle(color: Colors.black),
-          ),
-          SizedBox(height: 10,),
-          TextField(
-            decoration: InputDecoration(
-              enabledBorder: UnderlineInputBorder(
-                borderSide: BorderSide(color: Colors.black),
-              ),
-              focusedBorder: UnderlineInputBorder(
-                borderSide: BorderSide(color: Colors.black),
-              ),
-              border: OutlineInputBorder(),
-              labelStyle: new TextStyle(color: Colors.black),
-              labelText: 'Tłuszcz',
-              hintText: 'Podaj ilość tłuszczu w 1g produktu',
-              hintStyle: new TextStyle(color: Colors.black),
-            ),controller: fat,
-            style: TextStyle(color: Colors.black),
-          ),
-          SizedBox(height: 10,),
-          TextField(
-            decoration: InputDecoration(
-              enabledBorder: UnderlineInputBorder(
-                borderSide: BorderSide(color: Colors.black),
-              ),
-              focusedBorder: UnderlineInputBorder(
-                borderSide: BorderSide(color: Colors.black),
-              ),
-              border: OutlineInputBorder(),
-              labelStyle: new TextStyle(color: Colors.black),
-              labelText: 'QR',
-              hintText: 'Podaj kod qr  produktu',
-              hintStyle: new TextStyle(color: Colors.black),
-            ),controller: qr,
-            style: TextStyle(color: Colors.black),
-          ),
+        appBar: AppBar(
+          title: const Text("Dodaj Produkt"),
+          centerTitle: true,
+          backgroundColor: Colors.white,
+          foregroundColor: Colors.black,
+        ),
+        body: Center(
+            child: SingleChildScrollView(
+                child: Column(
+          children: [
             TextField(
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 enabledBorder: UnderlineInputBorder(
                   borderSide: BorderSide(color: Colors.black),
                 ),
@@ -141,42 +107,149 @@ class AddProduct extends StatelessWidget{
                   borderSide: BorderSide(color: Colors.black),
                 ),
                 border: OutlineInputBorder(),
-                labelStyle: new TextStyle(color: Colors.black),
+                labelStyle: TextStyle(color: Colors.black),
+                labelText: 'Nazwa',
+                hintText: 'Podaj nazwe produktu',
+                hintStyle: TextStyle(color: Colors.black),
+              ),
+              controller: nazwa,
+              style: const TextStyle(color: Colors.black),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            TextField(
+              decoration: const InputDecoration(
+                enabledBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(color: Colors.black),
+                ),
+                focusedBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(color: Colors.black),
+                ),
+                border: OutlineInputBorder(),
+                labelStyle: TextStyle(color: Colors.black),
+                labelText: 'Kaloryka',
+                hintText: 'Podaj kaloryke w 1g produktu',
+                hintStyle: TextStyle(color: Colors.black),
+              ),
+              controller: cal,
+              style: const TextStyle(color: Colors.black),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            TextField(
+              decoration: const InputDecoration(
+                enabledBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(color: Colors.black),
+                ),
+                focusedBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(color: Colors.black),
+                ),
+                border: OutlineInputBorder(),
+                labelStyle: TextStyle(color: Colors.black),
+                labelText: 'Węglowodany',
+                hintText: 'Podaj ilość Węglowodanów w 1g produktu',
+                hintStyle: TextStyle(color: Colors.black),
+              ),
+              controller: carbo,
+              style: const TextStyle(color: Colors.black),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            TextField(
+              decoration: const InputDecoration(
+                enabledBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(color: Colors.black),
+                ),
+                focusedBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(color: Colors.black),
+                ),
+                border: OutlineInputBorder(),
+                labelStyle:  TextStyle(color: Colors.black),
+                labelText: 'Białko',
+                hintText: 'Podaj ilość białka w 1g produktu',
+                hintStyle:  TextStyle(color: Colors.black),
+              ),
+              controller: whey,
+              style: const TextStyle(color: Colors.black),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            TextField(
+              decoration: const InputDecoration(
+                enabledBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(color: Colors.black),
+                ),
+                focusedBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(color: Colors.black),
+                ),
+                border: OutlineInputBorder(),
+                labelStyle:  TextStyle(color: Colors.black),
+                labelText: 'Tłuszcz',
+                hintText: 'Podaj ilość tłuszczu w 1g produktu',
+                hintStyle:  TextStyle(color: Colors.black),
+              ),
+              controller: fat,
+              style: const TextStyle(color: Colors.black),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            TextField(
+              decoration: const InputDecoration(
+                enabledBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(color: Colors.black),
+                ),
+                focusedBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(color: Colors.black),
+                ),
+                border: OutlineInputBorder(),
+                labelStyle:  TextStyle(color: Colors.black),
                 labelText: 'QR',
                 hintText: 'Podaj kod qr  produktu',
-                hintStyle: new TextStyle(color: Colors.black),
-              ),controller: qr,
-              style: TextStyle(color: Colors.black),
+                hintStyle:  TextStyle(color: Colors.black),
+              ),
+              controller: qr,
+              style: const TextStyle(color: Colors.black),
             ),
-            SizedBox(height: 10,),
+            const SizedBox(
+              height: 10,
+            ),
             RaisedButton(
               color: Colors.blue, // background
               textColor: Colors.white, // foreground
-              onPressed: () { },
-              child: Text('Skanuj kod qr produktu'),
+              onPressed: () {
+                scanQR();
+                qr.text=_scanBarcode;
+              },
+              child: const Text('Skanuj kod qr produktu'),
             ),
-          SizedBox(height: 10,),
-          RaisedButton(
-            color: Colors.black, // background
-            textColor: Colors.white, // foreground
-            onPressed: () {
-    FirebaseFirestore.instance
-        .collection('products')
-        .add({'Name': nazwa.text,
-              'Calories' : int.parse(cal.text),
-              'Fat' : int.parse(fat.text),
-              'Proteins' : int.parse(whey.text),
-              'Carbohydrates' : int.parse(carbo.text),
-              'Qr' : qr.text});
-          Navigator.pop(context, 'OK');
-            },
-            child: Text('Dodaj produkt'),
-          ),
-        ],)
-      )
-    )
-    );
+            const SizedBox(
+              height: 10,
+            ),
+            RaisedButton(
+              color: Colors.black, // background
+              textColor: Colors.white, // foreground
+              onPressed: () {
+                FirebaseFirestore.instance.collection('products').add({
+                  'Name': nazwa.text,
+                  'Calories': int.parse(cal.text),
+                  'Fat': int.parse(fat.text),
+                  'Proteins': int.parse(whey.text),
+                  'Carbohydrates': int.parse(carbo.text),
+                  'Qr': qr.text
+                });
+                Navigator.pop(context, 'OK');
+              },
+              child: const Text('Dodaj produkt'),
+            ),
+          ],
+        ))));
   }
+
   void dispose() {
     // Clean up the controller when the widget is disposed.
     fat.dispose();
@@ -185,7 +258,6 @@ class AddProduct extends StatelessWidget{
     qr.dispose();
     whey.dispose();
     nazwa.dispose();
-    //super.dispose();
+    super.dispose();
   }
-
 }

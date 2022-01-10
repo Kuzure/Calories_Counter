@@ -4,7 +4,13 @@ class UserModel {
   String? firstName;
   String? secondName;
   int? zapotrzebowanie;
-  UserModel({this.uid, this.email, this.firstName, this.secondName,this.zapotrzebowanie});
+
+  UserModel(
+      {this.uid,
+      this.email,
+      this.firstName,
+      this.secondName,
+      this.zapotrzebowanie});
 
   // receiving data from server
   factory UserModel.fromMap(map) {

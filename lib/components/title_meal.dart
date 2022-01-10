@@ -2,13 +2,12 @@ import 'package:calories_counter_app/components/add_meal.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class Title_Meal extends StatelessWidget{
-  const Title_Meal({
+class TitleMeal extends StatelessWidget {
+  const TitleMeal({
     Key? key,
     required this.title,
   }) : super(key: key);
   final String title;
-
 
   @override
   Widget build(BuildContext context) {
@@ -17,20 +16,23 @@ class Title_Meal extends StatelessWidget{
       child: Row(
         children: <Widget>[
           TitleWithCustomUnderline(text: title),
-          Spacer(),
-           IconButton(
+          const Spacer(),
+          IconButton(
             icon: const Icon(Icons.add_circle_outlined),
             color: Colors.white,
-            onPressed: () {Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => AddMeal(title)),
-            );},
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => AddMeal(title)),
+              );
+            },
           ),
         ],
       ),
     );
   }
 }
+
 class TitleWithCustomUnderline extends StatelessWidget {
   const TitleWithCustomUnderline({
     Key? key,
@@ -41,7 +43,7 @@ class TitleWithCustomUnderline extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 24,
       child: Stack(
         children: <Widget>[
@@ -49,10 +51,12 @@ class TitleWithCustomUnderline extends StatelessWidget {
             padding: const EdgeInsets.only(left: 20 / 4),
             child: Text(
               text,
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold,color: Colors.white),
+              style: const TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white),
             ),
           ),
-
         ],
       ),
     );
