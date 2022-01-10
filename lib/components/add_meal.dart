@@ -5,6 +5,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:uuid_type/uuid_type.dart';
+
+import 'add_product.dart';
 FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
 final _auth = FirebaseAuth.instance;
 class AddMeal extends StatelessWidget {
@@ -24,6 +26,23 @@ class AddMeal extends StatelessWidget {
         centerTitle: true,
         backgroundColor: Colors.white,
         foregroundColor: Colors.black,
+        actions: <Widget>[
+          Padding(
+              padding: EdgeInsets.only(right: 20.0),
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => AddProduct(title)),
+                  );
+                },
+                child: Icon(
+                  Icons.add_shopping_cart,
+                  size: 26.0,
+                ),
+              )
+          ),
+        ],
       ),
       body: StreamBuilder<QuerySnapshot>(
         stream: db.collection('products').snapshots(),
@@ -52,7 +71,10 @@ class AddMeal extends StatelessWidget {
                            ),
                          ),
                          TextButton(
-                           onPressed: () => Navigator.pop(context, 'Cancel'),
+                           onPressed: () {
+                             Navigator.pop(context, 'Cancel');
+                             gram.text='';
+                           } ,
                            child: const Text('Nie'),
                          ),
                          TextButton(
@@ -69,6 +91,7 @@ class AddMeal extends StatelessWidget {
                               'Data':  f.format(DateTime.now()),
                              });
                              Navigator.pop(context, 'OK');
+                             gram.text='';
                            }  ,
                            child: const Text('Tak'),
                          ),
