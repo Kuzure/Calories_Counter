@@ -1,95 +1,122 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
+import 'package:intl/intl.dart';
 
 class Meals extends StatelessWidget{
-  const Meals({Key? key}) : super(key: key);
-
+  final _auth = FirebaseAuth.instance;
+  final f =  DateFormat('yyyy-MM-dd');
+  final db = FirebaseFirestore.instance;
+  String nazwa_kolekcji='';
+  Meals(String nazwa_kolekcji){
+    this.nazwa_kolekcji=nazwa_kolekcji;
+  }
 
   @override
   Widget build(BuildContext context){
-  return SingleChildScrollView(
-    child: Column(
-      children: <Widget>[
-        Meal(
-          whey: 20,
-          fat: 10,
-          carbohydrates: 12,
-          kcal: 212,
-          gram: 32,
-          name: 'chleb',
-        ),
-        Meal(
-          whey: 20,
-          fat: 10,
-          carbohydrates: 12,
-          kcal: 212,
-          gram: 32,
-          name: 'szynka',
-        ),
-        Meal(
-          whey: 20,
-          fat: 10,
-          carbohydrates: 12,
-          kcal: 212,
-          gram: 32,
-          name: 'ser',
-        ),
-      ],
-    ),
-  );
+    return SingleChildScrollView(
+      child: Column(
+          children: <Widget>[
+            StreamBuilder<QuerySnapshot>(
+              stream:  FirebaseFirestore.instance
+                  .collection(nazwa_kolekcji)
+                  .where('User',isEqualTo: _auth.currentUser!.uid).where('Data',isEqualTo:f.format(DateTime.now()) ).snapshots(),
+
+              builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+                if (!snapshot.hasData) {
+                  return  Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }
+
+                return  ListView(
+                  scrollDirection: Axis.vertical,
+                  shrinkWrap: true,
+                  children: snapshot.data!.docs.map((doc) {
+                    return Container(
+                      child: Row(
+                       children: [
+                         Expanded(child:Meal(whey:
+                             doc['Proteins'],fat:doc['Fat'],carbohydrates: doc['Carbohydrates'],kcal:doc['Calories']*doc['Gram'], gram:doc['Gram'],name:doc['Name'],colection: nazwa_kolekcji,guid: doc.id,),
+                         ),
+                       ],
+                      ),
+                    );
+                  }).toList(),
+                );
+              },
+            ),
+          ]
+      ),
+    );
   }
 }
 class Meal extends StatelessWidget{
   const Meal({
     Key? key,
-     this.whey,
-     this.fat,
-     this.carbohydrates,
-     this.kcal,
-     this.gram,
+    this.whey,
+    this.fat,
+    this.carbohydrates,
+    this.kcal,
+    this.gram,
     this.name,
-}):super(key:key);
-  final double? whey,fat,carbohydrates,kcal,gram;
+    this.colection,
+    this.guid
+  }):super(key:key);
+  final int? whey;
+  final int? fat;
+  final int? carbohydrates;
+  final int? kcal;
+  final int? gram;
   final String? name;
+  final String? colection;
+  final String? guid;
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Container(
         margin: EdgeInsets.only(bottom: 1
-    ),
-    width: double.infinity,
-    child: Column(
-    children: <Widget>[
-        GestureDetector(
-          child: Container(
-            padding: EdgeInsets.all(20 / 2),
-            decoration: BoxDecoration(
-              color: Colors.white10,
-            ),
-            child: Row(
-              children: <Widget>[
-                RichText(text: TextSpan(
-                  children: [
-                    TextSpan(text:'$name $gram g\n',style: TextStyle(color: Colors.white),),
-                    TextSpan(text:'$kcal kcal',style: TextStyle(color: Colors.white),),
-                    TextSpan(text:'\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t$whey g\t\t\t\t\t\t\t\t\t\t\t\t',style: TextStyle(color: Colors.white),),
+        ),
+        width: double.infinity,
+        child: Column(
+            children: <Widget>[
+              GestureDetector(
+                child: Container(
+                  padding: EdgeInsets.all(25 / 2),
+                  decoration: BoxDecoration(
+                    color: Colors.white10,
+                  ),
+                  child: Row(
+                    children: <Widget>[
+                      Text('$name ${gram}g',style: TextStyle(color: Colors.white),),
+                      Spacer(),
+                      Text('${kcal} kcal ',style: TextStyle(color: Colors.white),),
+                      Spacer(),
+                      Text('B:${whey}g',style: TextStyle(color: Colors.white),),
+                      Spacer(),
+                      Text('T:${fat}g',style: TextStyle(color: Colors.white),),
+                      Spacer(),
+                      Text('W:${carbohydrates}g',style: TextStyle(color: Colors.white),),
+                      Spacer(),
+                      IconButton(
+                        icon: const Icon(Icons.delete),
+                        color: Colors.white,
+                        onPressed: () {
+                          FirebaseFirestore.instance
+                              .collection(colection!)
+                              .doc(guid).delete();
+                        ;},
+                      ),
+                    ]
 
-                    TextSpan(text:'$fat g \t\t\t\t\t\t\t\t\t\t\t',style: TextStyle(color: Colors.white),),
-
-                    TextSpan(text:'$carbohydrates g',style: TextStyle(color: Colors.white),),
-
-                  ]
-                )),
-
-
-              ],
-            ),
-          ),
+                      ),
+                  ),
+                ),
+            ]
         )
-        ]
-      )
     );
   }
 }

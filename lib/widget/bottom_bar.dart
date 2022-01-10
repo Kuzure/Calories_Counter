@@ -1,4 +1,5 @@
 
+import 'package:calories_counter_app/components/home.dart';
 import 'package:calories_counter_app/components/profil.dart';
 import 'package:calories_counter_app/main.dart';
 import 'package:flutter/cupertino.dart';

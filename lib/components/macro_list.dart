@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 class MacroList extends StatefulWidget{
   const MacroList({Key? key}) : super(key: key);
 
-
   @override
   _MacroListState createState()=>_MacroListState();
 }
