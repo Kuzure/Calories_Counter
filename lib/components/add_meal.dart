@@ -43,6 +43,16 @@ class AddMeal extends StatelessWidget {
                   size: 26.0,
                 ),
               )),
+          Padding(
+              padding: const EdgeInsets.only(right: 20.0),
+              child: GestureDetector(
+                onTap: () {
+                },
+                child: const Icon(
+                  Icons.add_a_photo,
+                  size: 26.0,
+                ),
+              )),
         ],
       ),
       body: StreamBuilder<QuerySnapshot>(
