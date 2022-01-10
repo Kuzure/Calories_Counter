@@ -4,11 +4,17 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
+import 'package:intl/intl.dart';
 
 class Meals extends StatelessWidget{
   final _auth = FirebaseAuth.instance;
-
+  final f =  DateFormat('yyyy-MM-dd');
   final db = FirebaseFirestore.instance;
+  String nazwa_kolekcji='';
+  Meals(String nazwa_kolekcji){
+    this.nazwa_kolekcji=nazwa_kolekcji;
+  }
+
   @override
   Widget build(BuildContext context){
     return SingleChildScrollView(
@@ -16,8 +22,9 @@ class Meals extends StatelessWidget{
           children: <Widget>[
             StreamBuilder<QuerySnapshot>(
               stream:  FirebaseFirestore.instance
-                  .collection('Breakfast')
-                  .where('User',isEqualTo: _auth.currentUser!.uid).snapshots(),
+                  .collection(nazwa_kolekcji)
+                  .where('User',isEqualTo: _auth.currentUser!.uid).where('Data',isEqualTo:f.format(DateTime.now()) ).snapshots(),
+
               builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
                 if (!snapshot.hasData) {
                   return  Center(
@@ -33,7 +40,7 @@ class Meals extends StatelessWidget{
                       child: Row(
                        children: [
                          Expanded(child:Meal(whey:
-                             doc['Proteins'],fat:doc['Fat'],carbohydrates: doc['Carbohydrates'],kcal:doc['Calories']*doc['Gram'], gram:doc['Gram'],name:doc['Name']),
+                             doc['Proteins'],fat:doc['Fat'],carbohydrates: doc['Carbohydrates'],kcal:doc['Calories']*doc['Gram'], gram:doc['Gram'],name:doc['Name'],colection: nazwa_kolekcji,guid: doc.id,),
                          ),
                        ],
                       ),
@@ -56,9 +63,17 @@ class Meal extends StatelessWidget{
     this.kcal,
     this.gram,
     this.name,
+    this.colection,
+    this.guid
   }):super(key:key);
-  final int? whey,fat,carbohydrates,kcal,gram;
+  final int? whey;
+  final int? fat;
+  final int? carbohydrates;
+  final int? kcal;
+  final int? gram;
   final String? name;
+  final String? colection;
+  final String? guid;
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -85,7 +100,18 @@ class Meal extends StatelessWidget{
                       Text('T:${fat}g',style: TextStyle(color: Colors.white),),
                       Spacer(),
                       Text('W:${carbohydrates}g',style: TextStyle(color: Colors.white),),
-                      Spacer(),]
+                      Spacer(),
+                      IconButton(
+                        icon: const Icon(Icons.delete),
+                        color: Colors.white,
+                        onPressed: () {
+                          FirebaseFirestore.instance
+                              .collection(colection!)
+                              .doc(guid).delete();
+                        ;},
+                      ),
+                    ]
+
                       ),
                   ),
                 ),

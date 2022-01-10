@@ -1,4 +1,4 @@
-import 'package:calories_counter_app/components/product_list.dart';
+import 'package:calories_counter_app/components/add_meal.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -23,7 +23,7 @@ class Title_Meal extends StatelessWidget{
             color: Colors.white,
             onPressed: () {Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => AddBreakfast()),
+              MaterialPageRoute(builder: (context) => AddMeal(title)),
             );},
           ),
         ],

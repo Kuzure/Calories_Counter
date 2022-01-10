@@ -1,4 +1,6 @@
 import 'package:calories_counter_app/widget/bottom_bar.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 enum Plec { male, female }
@@ -259,6 +261,10 @@ class _Demend extends State<Demend> {
             TextButton(
               child: const Text('ok'),
               onPressed: () {
+                FirebaseFirestore.instance
+                    .collection('users').doc('${FirebaseAuth.instance.currentUser!.uid}')
+                    .update({'zapotrzebowanie': '${kaloryka}',
+                  });
                 Navigator.of(context).pop();
               },
             ),

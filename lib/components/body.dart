@@ -16,10 +16,12 @@ class Body extends StatelessWidget{
     return SingleChildScrollView(
       child: Column(
       children:  <Widget>[
-        Title_Meal(title: "Śniadanie"),
-        Meals(),
+        Title_Meal(title: "Sniadanie"),
+        Meals("Sniadanie"),
         Title_Meal(title: "Obiad"),
+        Meals("Obiad"),
         Title_Meal(title: "Kolacja"),
+        Meals("Kolacja"),
       ],
     )
     );

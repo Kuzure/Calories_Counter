@@ -59,8 +59,9 @@ class _MyHomePage  extends State<MyHomePage> {
 
   AppBar buildAppBar() {
     return AppBar(
+      backgroundColor: Colors.white,
       centerTitle: true,
-      title: Image.asset("assets/icons/logo2.PNG"),
+      title: Image.asset("assets/icons/logo.PNG"),
       actions: <Widget>[
       ],
     );
