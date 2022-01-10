@@ -1,6 +1,6 @@
 # calories_counter_app
 
-A new Flutter project.
+Calories_Counter_app with Firebase
 
 ## Getting Started
 
