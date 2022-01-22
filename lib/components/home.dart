@@ -6,17 +6,18 @@ import 'package:flutter/material.dart';
 
 class MyHomePage extends StatefulWidget {
   static String tag = 'home-page';
+
   const MyHomePage({Key? key}) : super(key: key);
 
   @override
   State<MyHomePage> createState() => _MyHomePage();
 }
 
-class _MyHomePage  extends State<MyHomePage> {
+class _MyHomePage extends State<MyHomePage> {
   int _selectedIndex = 0;
-  List<Widget> _widgetOptions = <Widget>[
-    Body(),
-    Demend(),
+  final List<Widget> _widgetOptions = <Widget>[
+    const Body(),
+    const Demend(),
     Profil(),
   ];
 
@@ -24,25 +25,22 @@ class _MyHomePage  extends State<MyHomePage> {
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
-      backgroundColor: Colors.white10,
+      backgroundColor: Colors.white,
       appBar: buildAppBar(),
-      body:  _widgetOptions.elementAt(_selectedIndex),
+      body: _widgetOptions.elementAt(_selectedIndex),
       bottomNavigationBar: BottomNavigationBar(
-          items:  [
+          items: const [
             BottomNavigationBarItem(
               icon: Icon(Icons.restaurant),
               label: 'Home',
-
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.list),
               label: 'Lista',
-
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.account_circle_outlined),
               label: 'Profli',
-
             ),
           ],
           backgroundColor: Colors.black,
@@ -52,8 +50,8 @@ class _MyHomePage  extends State<MyHomePage> {
           onTap: (index) {
             setState(() {
               _selectedIndex = index;
-            });}
-      ),
+            });
+          }),
     );
   }
 
@@ -62,8 +60,7 @@ class _MyHomePage  extends State<MyHomePage> {
       backgroundColor: Colors.white,
       centerTitle: true,
       title: Image.asset("assets/icons/logo.PNG"),
-      actions: <Widget>[
-      ],
+      actions: const <Widget>[],
     );
   }
 }
