@@ -32,15 +32,15 @@ class _MyHomePage extends State<MyHomePage> {
           items: const [
             BottomNavigationBarItem(
               icon: Icon(Icons.restaurant),
-              label: 'Home',
+              label: 'Lista posilkow',
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.list),
-              label: 'Lista',
+              label: 'Zapotrzebowanie',
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.account_circle_outlined),
-              label: 'Profli',
+              label: 'Profil',
             ),
           ],
           backgroundColor: Colors.black,

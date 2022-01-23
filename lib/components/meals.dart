@@ -94,37 +94,41 @@ class Meal extends StatelessWidget {
             child: Container(
               padding: const EdgeInsets.all(25 / 2),
               decoration: const BoxDecoration(
-                color: Colors.black,
+                border: Border(
+                  top: BorderSide(width: 1, color: Colors.black),
+                  bottom: BorderSide(width: 1, color: Colors.black),
+                ),
+                color: Colors.white,
               ),
               child: Row(children: <Widget>[
                 Text(
                   '$name ${gram}g',
-                  style: const TextStyle(color: Colors.white),
+                  style: const TextStyle(color: Colors.black),
                 ),
                 const Spacer(),
                 Text(
                   '$kcal kcal ',
-                  style: const TextStyle(color: Colors.white),
+                  style: const TextStyle(color: Colors.black),
                 ),
                 const Spacer(),
                 Text(
                   'B:${whey}g',
-                  style: const TextStyle(color: Colors.white),
+                  style: const TextStyle(color: Colors.black),
                 ),
                 const Spacer(),
                 Text(
                   'T:${fat}g',
-                  style: const TextStyle(color: Colors.white),
+                  style: const TextStyle(color: Colors.black),
                 ),
                 const Spacer(),
                 Text(
                   'W:${carbohydrates}g',
-                  style: const TextStyle(color: Colors.white),
+                  style: const TextStyle(color: Colors.black),
                 ),
                 const Spacer(),
                 IconButton(
                   icon: const Icon(Icons.delete),
-                  color: Colors.white,
+                  color: Colors.black,
                   onPressed: () {
                     FirebaseFirestore.instance
                         .collection(colection!)

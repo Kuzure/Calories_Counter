@@ -145,7 +145,7 @@ class _Calculate extends State<Calculate> {
                   ),
                   border: OutlineInputBorder(),
                   labelStyle:  TextStyle(color: Colors.white),
-                  labelText: 'Wzrost',
+                  labelText: 'Wzrosta',
                   hintText: 'Podaj Wzrost',
                   hintStyle:  TextStyle(color: Colors.white),
                 ),
@@ -156,14 +156,16 @@ class _Calculate extends State<Calculate> {
             Padding(
               padding: const EdgeInsets.all(10),
               child: DropdownButton<String>(
-                dropdownColor: Colors.black,
+                dropdownColor: Colors.white,
                 value: selectedItem,
                 style: const TextStyle(color: Colors.white, fontSize: 20),
                 onChanged: (String? string) =>
                     setState(() => selectedItem = string!),
                 selectedItemBuilder: (BuildContext context) {
                   return items.map<Widget>((String item) {
-                    return Text(item);
+                    return Text(item,
+                        style: const TextStyle(color: Colors.black),
+                    );
                   }).toList();
                 },
                 items: items.map((String item) {
@@ -177,14 +179,16 @@ class _Calculate extends State<Calculate> {
             Padding(
               padding: const EdgeInsets.all(10),
               child: DropdownButton<String>(
-                dropdownColor: Colors.black,
+                dropdownColor: Colors.white,
                 value: selectCel,
                 style: const TextStyle(color: Colors.white, fontSize: 20),
                 onChanged: (String? string) =>
                     setState(() => selectCel = string!),
                 selectedItemBuilder: (BuildContext context) {
                   return Cele.map<Widget>((String Cele) {
-                    return Text(Cele);
+                    return Text(Cele,
+                        style: const TextStyle(color: Colors.black),
+                    );
                   }).toList();
                 },
                 items: Cele.map((String Cele) {

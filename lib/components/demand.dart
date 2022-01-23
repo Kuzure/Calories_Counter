@@ -157,7 +157,7 @@ class _Demend extends State<Demend> {
             Padding(
               padding: const EdgeInsets.all(10),
               child: DropdownButton<String>(
-                dropdownColor: Colors.black,
+                dropdownColor: Colors.white,
                 value: selectedItem,
                 style: const TextStyle(color: Colors.black, fontSize: 20),
                 onChanged: (String? string) =>
@@ -178,7 +178,7 @@ class _Demend extends State<Demend> {
             Padding(
               padding: const EdgeInsets.all(10),
               child: DropdownButton<String>(
-                dropdownColor: Colors.black,
+                dropdownColor: Colors.white,
                 value: selectCel,
                 style: const TextStyle(color: Colors.black, fontSize: 20),
                 onChanged: (String? string) =>
