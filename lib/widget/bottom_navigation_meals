@@ -1,4 +1,4 @@
-class BottomNavigationMeals extends StatefulWidget {
+lass BottomNavigationMeals extends StatefulWidget {
   @override
   _BottomNavigationMealsState createState() => _BottomNavigationMealsState();
 }

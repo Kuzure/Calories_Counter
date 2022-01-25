@@ -43,7 +43,7 @@ class AddMeal extends StatelessWidget {
                   size: 26.0,
                 ),
               )),
-          Padding(
+         /* Padding(
               padding: const EdgeInsets.only(right: 20.0),
               child: GestureDetector(
                 onTap: () {
@@ -52,7 +52,7 @@ class AddMeal extends StatelessWidget {
                   Icons.add_a_photo,
                   size: 26.0,
                 ),
-              )),
+              )),*/
         ],
       ),
       body: StreamBuilder<QuerySnapshot>(

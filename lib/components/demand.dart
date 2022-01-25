@@ -271,9 +271,9 @@ class _Demend extends State<Demend> {
             child: ListBody(
               children: <Widget>[
                 Text('Twoje zapotrzebowanie to $kaloryka kcal\n'
-                    'białko:$bialko g\n'
-                    'tluszcze:$tluszcze g\n'
-                    'węglowodany:$wegle g'),
+                    'białko: $bialko g\n'
+                    'tluszcze: $tluszcze g\n'
+                    'węglowodany: $wegle g'),
               ],
             ),
           ),

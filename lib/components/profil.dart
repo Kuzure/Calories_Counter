@@ -51,12 +51,12 @@ class Profil extends StatelessWidget {
                           children: [
                             const Spacer(),
                             Text(
-                              "Imie:${doc['firstName']}",
+                              "Imie: ${doc['firstName']}",
                               style: const TextStyle(
                                   color: Colors.black, fontSize: 20),
                             ),
                             const Spacer(),
-                            Text("Nazwisko:${doc['secondName']}",
+                            Text("Nazwisko: ${doc['secondName']}",
                                 style: const TextStyle(
                                     color: Colors.black, fontSize: 20)),
                             const Spacer(),
@@ -64,7 +64,7 @@ class Profil extends StatelessWidget {
                         ),
                         Center(
                           child: Text(
-                              "Zapotrzebowanie:${doc['zapotrzebowanie']} kcal",
+                              "Zapotrzebowanie: ${doc['zapotrzebowanie']} kcal",
                               style: const TextStyle(
                                   color: Colors.black, fontSize: 20)),
                         )
