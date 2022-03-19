@@ -1,7 +1,6 @@
 import 'package:calories_counter_app/components/body.dart';
 import 'package:calories_counter_app/components/demand.dart';
 import 'package:calories_counter_app/components/profil.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class MyHomePage extends StatefulWidget {

@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 enum Plec { male, female }
@@ -50,18 +49,6 @@ class _Demend extends State<Demend> {
         child: SingleChildScrollView(
             child: Column(
           children: <Widget>[
-            const Text(
-              'Oblicz zapotrzebowanie Kaloryczne',
-              textAlign: TextAlign.center,
-              overflow: TextOverflow.ellipsis,
-              style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 23,
-                  color: Colors.black),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
             ListTile(
               title: const Text(
                 'Mężczyzna',
@@ -98,12 +85,6 @@ class _Demend extends State<Demend> {
               padding: const EdgeInsets.all(15),
               child: TextField(
                 decoration: const InputDecoration(
-                  enabledBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(color: Colors.black),
-                  ),
-                  focusedBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(color: Colors.black),
-                  ),
                   border: OutlineInputBorder(),
                   labelStyle:  TextStyle(color: Colors.black),
                   labelText: 'Waga',
@@ -118,12 +99,6 @@ class _Demend extends State<Demend> {
               padding: const EdgeInsets.all(15),
               child: TextField(
                 decoration: const InputDecoration(
-                  enabledBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(color: Colors.black),
-                  ),
-                  focusedBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(color: Colors.black),
-                  ),
                   border: OutlineInputBorder(),
                   labelStyle:  TextStyle(color: Colors.black),
                   labelText: 'Wiek',
@@ -138,12 +113,6 @@ class _Demend extends State<Demend> {
               padding: const EdgeInsets.all(15),
               child: TextField(
                 decoration: const InputDecoration(
-                  enabledBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(color: Colors.black),
-                  ),
-                  focusedBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(color: Colors.black),
-                  ),
                   border: OutlineInputBorder(),
                   labelStyle:  TextStyle(color: Colors.black),
                   labelText: 'Wzrost',
@@ -155,51 +124,70 @@ class _Demend extends State<Demend> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(10),
-              child: DropdownButton<String>(
-                dropdownColor: Colors.white,
-                value: selectedItem,
-                style: const TextStyle(color: Colors.black, fontSize: 20),
-                onChanged: (String? string) =>
-                    setState(() => selectedItem = string!),
-                selectedItemBuilder: (BuildContext context) {
-                  return items.map<Widget>((String item) {
-                    return Text(item);
-                  }).toList();
-                },
-                items: items.map((String item) {
-                  return DropdownMenuItem<String>(
-                    child: Text(item),
-                    value: item,
-                  );
-                }).toList(),
+              padding: const EdgeInsets.all(15),
+              child: InputDecorator(
+                decoration: const InputDecoration(border: OutlineInputBorder()),
+                child: DropdownButtonHideUnderline(
+                  child:  DropdownButton<String>(
+                    dropdownColor: Colors.white,
+                    value: selectedItem,
+                    style: const TextStyle(color: Colors.black, fontSize: 20),
+                    onChanged: (String? string) =>
+                        setState(() => selectedItem = string!),
+                    selectedItemBuilder: (BuildContext context) {
+                      return items.map<Widget>((String item) {
+                        return Text(item);
+                      }).toList();
+                    },
+                    items: items.map((String item) {
+                      return DropdownMenuItem<String>(
+                        child: Text(item),
+                        value: item,
+                      );
+                    }).toList(),
+                  ),
+                ),
               ),
+
+            ),
+            Padding(
+              padding: const EdgeInsets.all(15),
+              child:InputDecorator(
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                ),
+                child: DropdownButtonHideUnderline(
+                  child: DropdownButton<String>(
+                    dropdownColor: Colors.white,
+                    value: selectCel,
+                    style: const TextStyle(color: Colors.black, fontSize: 20),
+                    onChanged: (String? string) =>
+                        setState(() => selectCel = string!),
+                    selectedItemBuilder: (BuildContext context) {
+                      return Cele.map<Widget>((String Cele) {
+                        return Text(Cele);
+                      }).toList();
+                    },
+                    items: Cele.map((String Cele) {
+                      return DropdownMenuItem<String>(
+                        child: Text(Cele),
+                        value: Cele,
+                      );
+                    }).toList(),
+                  ),
+                ),
+              ),
+
             ),
             Padding(
               padding: const EdgeInsets.all(10),
-              child: DropdownButton<String>(
-                dropdownColor: Colors.white,
-                value: selectCel,
-                style: const TextStyle(color: Colors.black, fontSize: 20),
-                onChanged: (String? string) =>
-                    setState(() => selectCel = string!),
-                selectedItemBuilder: (BuildContext context) {
-                  return Cele.map<Widget>((String Cele) {
-                    return Text(Cele);
-                  }).toList();
-                },
-                items: Cele.map((String Cele) {
-                  return DropdownMenuItem<String>(
-                    child: Text(Cele),
-                    value: Cele,
-                  );
-                }).toList(),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(10),
-              child: FlatButton(
-                textColor: Colors.black, // foreground
+              child:Material(
+                  elevation: 5,
+                  borderRadius: BorderRadius.circular(30),
+                  color: Colors.black,
+                  child: MaterialButton(// foreground
+                padding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
+                minWidth: MediaQuery.of(context).size.width,
                 onPressed: () {
                   int kaloryka = 0;
                   double a = double.parse(weight.text);
@@ -250,10 +238,14 @@ class _Demend extends State<Demend> {
 
                   _showMyDialog(bialko, tluszcze, wegle, kaloryka);
                 },
-
-                child: const Text('Sprawdź swoje zapotrzebowanie'),
+                  child: const Text(
+                    "Sprawdź swoje zapotrzebowanie",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),
+                  ),
               ),
-            )
+            ))
           ],
         )));
   }

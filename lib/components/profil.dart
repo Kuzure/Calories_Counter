@@ -78,7 +78,7 @@ class Profil extends StatelessWidget {
           SizedBox(
             width: double.infinity,
             height: 60,
-            child: GFButton(
+            child: GFButton(color: Colors.black,
                 child: const Text(
                   ("wyloguj"),
                   style: TextStyle(

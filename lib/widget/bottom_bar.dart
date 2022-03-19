@@ -1,6 +1,5 @@
 import 'package:calories_counter_app/components/home.dart';
 import 'package:calories_counter_app/components/profil.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class MyBottomNavBar extends StatelessWidget {

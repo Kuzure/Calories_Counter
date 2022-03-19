@@ -1,11 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:uuid_type/uuid_type.dart';
 
 import 'add_product.dart';
+import 'home.dart';
 
 FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
 final _auth = FirebaseAuth.instance;
@@ -102,7 +102,10 @@ class AddMeal extends StatelessWidget {
                                 'User': _auth.currentUser!.uid,
                                 'Data': f.format(DateTime.now()),
                               });
-                              Navigator.pop(context, 'OK');
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => const MyHomePage()),
+                              );
                               gram.text = '';
                             },
                             child: const Text('Tak'),
